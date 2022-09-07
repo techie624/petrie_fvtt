@@ -1,13 +1,12 @@
 # Which OS base Image is being used
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 # Update and install needed software
-RUN apt-get update \
-  && apt-get install -y vim git htop sudo sed wget curl libssl-dev unzip
+RUN apt-get update && \
+  apt-get install -y vim git htop sudo sed wget curl libssl-dev unzip telnet net-tools snapd nginx
 
 # set up non-root user
 RUN useradd -m gygax
-#RUN echo -e "gary\ngary\n" | passwd gygax
 RUN echo "gary\ngary\n" | passwd gygax
 RUN sudo usermod -aG sudo gygax
 RUN usermod --shell /bin/bash gygax
@@ -19,14 +18,21 @@ COPY .vimrc /home/gygax/
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata
 
 # Installing node.js
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN sudo apt install -y nodejs
 
 # Install FoundryVTT
-RUN mkdir /home/gygax/foundryvtt
-RUN mkdir /home/gygax/foundrydata
 # download file from google drive
-RUN cd /home/gygax/foundryvtt/ && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1PpqMnrz1VAFC3hphHcVWlflIUNs7Q0Iv' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1PpqMnrz1VAFC3hphHcVWlflIUNs7Q0Iv" -O foundryvtt.zip && rm -rf /tmp/cookies.txt
-RUN cd /home/gygax/foundryvtt/ && unzip /home/gygax/foundryvtt/foundryvtt.zip
+#RUN cd /home/gygax/foundryvtt/ && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I" -O foundryvtt.zip && rm -rf /tmp/cookies.txt
+
+
+COPY foundryvtt/ /home/gygax/foundryvtt/
+
+COPY options.json /root/foundrydata/Config/
+
+COPY fvtt.ethorians.net /etc/nginx/sites-available/
+RUN sudo unlink /etc/nginx/sites-enabled/default
+RUN sudo ln -s /etc/nginx/sites-available/fvtt.ethorians.net /etc/nginx/sites-enabled/
+#RUN service nginx start
 
 CMD cd /home/gygax/foundryvtt/ && node resources/app/main.js --dataPath=$HOME/foundrydata

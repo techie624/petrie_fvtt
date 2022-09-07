@@ -1,3 +1,7 @@
 foundryvtt/**
 ./foundryvtt/**
-./foundryvtt/**
+foundryvtt/
+./foundryvtt/
+letsencrypt/
+letsencrypt/**
+./letsencrypt

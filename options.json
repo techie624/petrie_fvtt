@@ -1,0 +1,31 @@
+// {
+// 	"port": 30000,
+// 	"upnp": false,
+// 	"fullscreen": false,
+// 	"hostname": "fvtt.ethorians.net",
+// 	"localHostname": null,
+// 	"routePrefix": null,
+// 	"sslCert": null,
+// 	"sslKey": null,
+// 	"awsConfig": null,
+// 	"dataPath": "/root/foundrydata",
+// 	"passwordSalt": null,
+// 	"proxySSL": false,
+// 	"proxyPort": 80,
+// 	"serviceConfig": null,
+// 	"updateChannel": "stable",
+// 	"language": "en.core",
+// 	"upnpLeaseDuration": null,
+// 	"compressStatic": true,
+// 	"world": null
+//   }
+
+{
+	"hostname": "fvtt.ethorians.net",
+	"routePrefix": null,
+	"sslCert": "fullchain1.pem",
+	"sslKey": "privkey1.pem",
+	"proxySSL": true,
+	"port": 30000,
+	"proxyPort": 443
+}

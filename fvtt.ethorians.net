@@ -1,0 +1,40 @@
+# This goes in a file within /etc/nginx/sites-available/. By convention,
+# the filename would be either "your.domain.com" or "foundryvtt", but it
+# really does not matter as long as it's unique and descriptive for you.
+
+server {
+
+    # Enter your fully qualified domain name or leave blank
+    server_name             fvtt.ethorians.net;
+
+    # Listen on port 443 using SSL certificates
+    listen                  443 ssl;
+    ssl_certificate         "/root/foundrydata/Config/fullchain1.pem";
+    ssl_certificate_key     "/root/foundrydata/Config/privkey1.pem";
+
+    # Sets the Max Upload size to 300 MB
+    client_max_body_size 300M;
+
+    # Proxy Requests to Foundry VTT
+    location / {
+        root /home/gygax/foundryvtt;
+
+        # Set proxy headers
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # These are important to support WebSockets
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+
+        # Make sure to set your Foundry VTT port number
+        proxy_pass http://127.0.0.1:30000;
+    }
+}
+
+server {
+    listen 80;
+    server_name ethorians.net www.ethorians.net fvtt.ethorians.net;
+    return 301 https://fvtt.ethorians.net$request_uri;
+}
