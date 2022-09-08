@@ -23,16 +23,26 @@ RUN sudo apt install -y nodejs
 
 # Install FoundryVTT
 # download file from google drive
-#RUN cd /home/gygax/foundryvtt/ && wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I" -O foundryvtt.zip && rm -rf /tmp/cookies.txt
+USER gygax
+RUN mkdir /home/gygax/foundryvtt/ && \
+  cd /home/gygax/foundryvtt/ && \
+  wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dUZxbHlJF3FORpVdcoGyrWwSgDluMg4a" -O foundryvtt.zip && \
+  rm -rf /tmp/cookies.txt && \
+  unzip foundryvtt.zip
 
+#COPY /media/storage/dnd/fvtt/* /root/foundrydata
+USER root
+RUN  mkdir /root/foundrydata/
 
-COPY foundryvtt/ /home/gygax/foundryvtt/
+#COPY foundryvtt/ /home/gygax/foundryvtt/
 
 COPY options.json /root/foundrydata/Config/
 
 COPY fvtt.ethorians.net /etc/nginx/sites-available/
 RUN sudo unlink /etc/nginx/sites-enabled/default
-RUN sudo ln -s /etc/nginx/sites-available/fvtt.ethorians.net /etc/nginx/sites-enabled/
+#RUN sudo ln -s /etc/nginx/sites-available/fvtt.ethorians.net /etc/nginx/sites-enabled/
 #RUN service nginx start
 
+USER gygax
 CMD cd /home/gygax/foundryvtt/ && node resources/app/main.js --dataPath=$HOME/foundrydata
+#CMD bash

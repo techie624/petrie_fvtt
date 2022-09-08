@@ -57,19 +57,50 @@ time docker image build -t fvtt-node:$TAG .
 # --network=dnd_net \
 # fvtt-node:$TAG
 
+# docker run -dti \
+# --name fvtt-node \
+# --hostname fvtt-node \
+# --volume /media/storage/dnd/fvtt/fvtt_data:/root/foundrydata \
+# --publish 80:80/tcp \
+# --publish 443:443/tcp \
+# fvtt-node:$TAG
+
 docker run -dti \
 --name fvtt-node \
 --hostname fvtt-node \
---volume /media/storage/dnd/fvtt/fvtt_data:/root/foundrydata \
---publish 80:80/tcp \
+--publish 80:30000/tcp \
 --publish 443:443/tcp \
 fvtt-node:$TAG
 
 
 sleep 5
 
-docker exec -ti fvtt-node /bin/bash -c "service nginx start"
+docker exec -ti -u root fvtt-node /bin/bash -c "service nginx start"
 
 sleep 3
 
-docker exec -ti fvtt-node /bin/bash -c "service nginx status"
+docker exec -ti -u root fvtt-node /bin/bash -c "service nginx status"
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+### docker login
+
+docker login -u $DOCKER_LOGIN_USERNAME -p $DOCKER_LOGIN_PASS
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+### create and push docker image
+
+docker tag fvtt-node:$TAG techie624/fvtt:$TAG
+
+docker tag fvtt-node:$TAG techie624/fvtt:latest
+
+docker push techie624/fvtt:$TAG
+
+techie624/fvtt:latest
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+### 
+
+
+#INDEX_TEST="Foundry Virtual Tabletop"
+#wget localhost
+#cat -r 5 index.html | cut -d ">" -f2 | cut -d "&" -f1
