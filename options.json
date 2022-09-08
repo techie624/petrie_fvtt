@@ -26,6 +26,6 @@
 	"sslCert": "fullchain1.pem",
 	"sslKey": "privkey1.pem",
 	"proxySSL": true,
-	"port": 80,
+	"port": 30000,
 	"proxyPort": 443
 }

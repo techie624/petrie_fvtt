@@ -68,7 +68,7 @@ time docker image build -t fvtt-node:$TAG .
 docker run -dti \
 --name fvtt-node \
 --hostname fvtt-node \
---publish 80:80/tcp \
+--publish 80:30000/tcp \
 --publish 443:443/tcp \
 fvtt-node:$TAG
 
