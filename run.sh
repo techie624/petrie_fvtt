@@ -75,11 +75,11 @@ fvtt-node:$TAG
 
 sleep 5
 
-docker exec -ti -u root fvtt-node /bin/bash -c "service nginx start"
+docker exec -i -u root fvtt-node /bin/bash -c "service nginx start"
 
 sleep 3
 
-docker exec -ti -u root fvtt-node /bin/bash -c "service nginx status"
+docker exec -i -u root fvtt-node /bin/bash -c "service nginx status"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ### docker login
