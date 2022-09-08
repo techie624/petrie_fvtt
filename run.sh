@@ -81,21 +81,23 @@ sleep 3
 
 docker exec -i -u root fvtt-node /bin/bash -c "service nginx status"
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-### docker login
+# # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+# ### docker login
 
-docker login -u $DOCKER_LOGIN_USERNAME -p $DOCKER_LOGIN_PASS
+# set +x
+#  docker login -u $DOCKER_LOGIN_USERNAME -p $DOCKER_LOGIN_PASS
+# set -x
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
-### create and push docker image
+# # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+# ### create and push docker image
 
-docker tag fvtt-node:$TAG techie624/fvtt:$TAG
+# docker tag fvtt-node:$TAG techie624/fvtt:$TAG
 
-docker tag fvtt-node:$TAG techie624/fvtt:latest
+# docker tag fvtt-node:$TAG techie624/fvtt:latest
 
-docker push techie624/fvtt:$TAG
+#docker push techie624/fvtt:$TAG
 
-techie624/fvtt:latest
+#docker push techie624/fvtt:latest
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ### 
