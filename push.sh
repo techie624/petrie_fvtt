@@ -40,4 +40,6 @@ docker push techie624/fvtt:latest
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ### clean up all docker images related to fvtt
 
-docker rmi -f $(docker images -a |grep fvtt)
+docker rm -f fvtt-node:$TAG || true;
+
+docker rmi -f fvtt-node:$TAG techie624/fvtt:$TAG techie624/fvtt:latest ||true;
