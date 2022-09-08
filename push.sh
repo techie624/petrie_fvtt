@@ -43,3 +43,5 @@ docker push techie624/fvtt:latest
 docker rm -f fvtt-node:$TAG || true;
 
 docker rmi -f fvtt-node:$TAG techie624/fvtt:$TAG techie624/fvtt:latest ||true;
+
+#test
