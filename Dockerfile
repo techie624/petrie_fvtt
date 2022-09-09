@@ -23,10 +23,19 @@ RUN sudo apt install -y nodejs
 
 # Install FoundryVTT
 # download file from google drive
+
 USER gygax
+#build 10.284
+# RUN mkdir /home/gygax/foundryvtt/ && \
+#   cd /home/gygax/foundryvtt/ && \
+#   wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dUZxbHlJF3FORpVdcoGyrWwSgDluMg4a" -O foundryvtt.zip && \
+#   rm -rf /tmp/cookies.txt && \
+#   unzip foundryvtt.zip
+
+# build 0.7.9
 RUN mkdir /home/gygax/foundryvtt/ && \
   cd /home/gygax/foundryvtt/ && \
-  wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=18iV2MyGvkL7iaYsAekOwuUNnWMuNtl0I' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dUZxbHlJF3FORpVdcoGyrWwSgDluMg4a" -O foundryvtt.zip && \
+  wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1YbTiCTAWPa60-eiHY_uCWx1kQ5Typra8' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dUZxbHlJF3FORpVdcoGyrWwSgDluMg4a" -O foundryvtt.zip && \
   rm -rf /tmp/cookies.txt && \
   unzip foundryvtt.zip
 
