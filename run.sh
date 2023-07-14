@@ -32,8 +32,8 @@ docker rm -f fvtt-node && docker image rm fvtt-node || true;
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ### build image
 
-export DOCKER_BUILDKIT=1
-export DOCKER_CLI_BUILDKIT=1
+#export DOCKER_BUILDKIT=1
+#export DOCKER_CLI_BUILDKIT=1
 time docker image build -t fvtt-node:$TAG .
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
