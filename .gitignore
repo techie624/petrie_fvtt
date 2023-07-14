@@ -5,3 +5,4 @@ foundryvtt/
 letsencrypt/
 letsencrypt/**
 ./letsencrypt
+*.pem
