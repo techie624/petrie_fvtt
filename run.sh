@@ -71,6 +71,7 @@ docker run -dti \
 --hostname fvtt-node \
 --publish 80:30000/tcp \
 --publish 443:443/tcp \
+--restart=always \
 fvtt-node:$TAG
 
 
